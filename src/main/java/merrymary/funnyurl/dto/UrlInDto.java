@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotBlank;
 
@@ -13,5 +14,6 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class UrlInDto {
     @NotBlank
-    String url;
+    @URL
+    String longUrl;
 }
