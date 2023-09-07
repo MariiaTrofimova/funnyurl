@@ -1,7 +1,10 @@
 package merrymary.funnyurl.controllers;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import merrymary.funnyurl.dto.UrlInDto;
 import merrymary.funnyurl.exception.NotFoundException;
+import merrymary.funnyurl.service.FunnyUrlService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,28 +17,26 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping
+@Slf4j
+@RequiredArgsConstructor
 public class FunnyUrlController {
+    private final FunnyUrlService service;
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public String add(@Valid @ModelAttribute UrlInDto urlInDto) {
-        return "index";
+    public String add(@Valid @ModelAttribute UrlInDto urlInDto, HttpServletRequest request) {
+        String ip = request.getRemoteAddr();
+        return service.addUrl(urlInDto, ip);
     }
 
     @GetMapping("/{shortUrl}")
     @ResponseStatus(HttpStatus.TEMPORARY_REDIRECT)
     public RedirectView get(@PathVariable String shortUrl, RedirectAttributes attributes, HttpServletRequest request) {
         if (!shortUrl.chars().allMatch(Character::isLetter)) {
-            throw new NotFoundException("Помотушта");
+            throw new NotFoundException("Link contains non letter characters");
         }
         String ip = request.getRemoteAddr();
-        attributes.addFlashAttribute("flashAttribute", "redirectWithRedirectView");
-        attributes.addAttribute("attribute", "redirectWithRedirectView");
-        //server: поиск нужной ссылки, запись статистики просмотров
-        //public static boolean isAlpha(String s) {
-        //        return s != null && s.chars().allMatch(Character::isLetter);
-        //    }
-        return new RedirectView("https://ya.ru/");
+        return service.getLongUrl(shortUrl, attributes, ip);
     }
 
     @GetMapping("/")
