@@ -3,19 +3,18 @@ package merrymary.funnyurl.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.Instant;
 
 @Entity
-@Table(name = "urls")
+@Table(name = "words")
 @Getter
 @Setter
 @ToString
-public class Url {
-
+public class Word {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String longUrl;
-    private String shortUrl;
-    private Instant expireDate;
+    private String name;
+    private String description;
+    private String example;
+    private boolean isFree;
 }

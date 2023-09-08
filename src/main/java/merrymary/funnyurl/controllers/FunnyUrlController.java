@@ -24,9 +24,9 @@ public class FunnyUrlController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public String add(@Valid @ModelAttribute UrlInDto urlInDto, HttpServletRequest request) {
+    public String add(@Valid @ModelAttribute UrlInDto urlInDto, HttpServletRequest request, Model model) {
         String ip = request.getRemoteAddr();
-        return service.addUrl(urlInDto, ip);
+        return service.addUrl(urlInDto, ip, model);
     }
 
     @GetMapping("/{shortUrl}")

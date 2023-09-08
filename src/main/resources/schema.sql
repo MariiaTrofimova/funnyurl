@@ -1,0 +1,26 @@
+CREATE TABLE IF NOT EXISTS words
+(
+    id          BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name        VARCHAR(255)  NOT NULL,
+    description VARCHAR(2048) NOT NULL,
+    example     VARCHAR(1024) NOT NULL,
+    is_free     boolean       NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS urls
+(
+    id           BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    long_url     VARCHAR(255) NOT NULL,
+    short_url_id BIGINT       NOT NULL,
+    created      TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
+    CONSTRAINT fk_urls_to_words FOREIGN KEY (short_url_id) REFERENCES words (id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS hits
+(
+    id        BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    url_id    BIGINT      NOT NULL,
+    ip        VARCHAR(46) NOT NULL,
+    timestamp TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
+    CONSTRAINT fk_hits_to_urls FOREIGN KEY (url_id) REFERENCES urls (id) ON DELETE CASCADE
+)
