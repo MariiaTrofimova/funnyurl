@@ -1,9 +1,6 @@
 package merrymary.funnyurl.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
@@ -11,11 +8,10 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Builder
 public class WordDto {
     @NotBlank
     private String name;
     @NotBlank
     private String description;
-    @NotBlank
-    private String example;
 }

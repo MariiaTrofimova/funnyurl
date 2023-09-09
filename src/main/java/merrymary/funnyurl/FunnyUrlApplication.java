@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FunnyurlApplication {
+public class FunnyUrlApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FunnyurlApplication.class, args);
+		SpringApplication.run(FunnyUrlApplication.class, args);
 	}
 
 }

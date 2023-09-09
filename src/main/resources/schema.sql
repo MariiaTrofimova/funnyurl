@@ -3,15 +3,16 @@ CREATE TABLE IF NOT EXISTS words
     id          BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name        VARCHAR(255)  NOT NULL,
     description VARCHAR(2048) NOT NULL,
-    is_free     boolean       NOT NULL
+    is_free     boolean DEFAULT true,
+    CONSTRAINT UQ_WORD_NAME UNIQUE (name)
 );
 
 CREATE TABLE IF NOT EXISTS urls
 (
-    id           BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    long_url     VARCHAR(255) NOT NULL,
-    word_id BIGINT       NOT NULL,
-    created      TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
+    id       BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    long_url VARCHAR(2048) NOT NULL,
+    word_id  BIGINT        NOT NULL,
+    created  TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
     CONSTRAINT fk_urls_to_words FOREIGN KEY (word_id) REFERENCES words (id) ON DELETE CASCADE
 );
 

@@ -1,12 +1,10 @@
 package merrymary.funnyurl.service;
 
 import merrymary.funnyurl.dto.WordDto;
-import merrymary.funnyurl.model.Word;
-
-import java.util.List;
+import org.springframework.ui.Model;
 
 public interface WordsService {
-    boolean addWords(List<WordDto> words);
+    String addWords(WordDto word, Model model);
 
-    boolean freeExpiredWords();
+    String freeExpiredWords();
 }

@@ -4,27 +4,31 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import merrymary.funnyurl.dto.WordDto;
 import merrymary.funnyurl.service.WordsService;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
-@RestController("/admin/words")
+@Controller
+@RequestMapping("/admin/words")
 @Slf4j
 @RequiredArgsConstructor
 public class WordsController {
     private final WordsService service;
 
-    @PostMapping
-    public boolean addWords(@RequestBody @Valid List<WordDto> words){
-        return service.addWords(words);
+    @GetMapping
+    public String getWordsPage(Model model) {
+        return "addWords";
     }
 
-    @PatchMapping
-    public boolean freeExpiredWords() {
+    @PostMapping
+    public String addWords(@Valid @ModelAttribute WordDto word, Model model){
+        return service.addWords(word, model);
+    }
+
+    @PatchMapping("/free")
+    public String freeExpiredWords() {
         return service.freeExpiredWords();
     }
 

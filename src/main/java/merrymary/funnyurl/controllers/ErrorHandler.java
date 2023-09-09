@@ -2,6 +2,7 @@ package merrymary.funnyurl.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import merrymary.funnyurl.exception.NotFoundException;
+import merrymary.funnyurl.exception.WordExistException;
 import merrymary.funnyurl.model.ApiError;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
@@ -35,6 +36,13 @@ public class ErrorHandler {
     public String handleBindException(final BindException e) {
         log.error(e.getMessage(), e);
         return "index";
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleWordExistException(final WordExistException e) {
+        log.error(e.getMessage(), e);
+        return "addWordsResultExist";
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
