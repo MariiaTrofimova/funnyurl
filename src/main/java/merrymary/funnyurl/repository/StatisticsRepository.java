@@ -1,9 +1,10 @@
 package merrymary.funnyurl.repository;
 
-import merrymary.funnyurl.model.Word;
+import merrymary.funnyurl.model.Hit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface WordRepository extends JpaRepository<Word, Long> {
+public interface StatisticsRepository extends JpaRepository<Hit, Long> {
+
 }

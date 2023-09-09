@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FunnyUrls</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet"/>
+    <link th:href="@{/img/icon.png}" rel="shortcut icon"/>
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h1>Funny URLs</h1>
+<h2>Shorten your URLs & Learn funny words</h2>
+
+<div style="margin-top: -35px">
+    <h1 style="color: black"><span th:text="${topHead}"></span></h1>
+    <div class="description"><p><span th:text="${topList}"></span></p></div>
+</div>
+<!-- partial -->
+<script src="../static/js/script.js"></script>
+
+</body>
+</html>

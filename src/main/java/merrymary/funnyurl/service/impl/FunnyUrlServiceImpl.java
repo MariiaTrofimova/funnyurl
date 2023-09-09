@@ -35,11 +35,11 @@ public class FunnyUrlServiceImpl implements FunnyUrlService {
         Word word = new Word();
         word.setName("cattywampus");
         word.setDescription("The word cattywampus is most commonly used in the USA, especially the southern states. It is a word which refers to something that is misaligned.");
-        word.setExample("The bank is cattywampus from the park.");
+        //word.setExample("The bank is cattywampus from the park.");
         model.addAttribute("shortUrl", PREFIX + word.getName());
         model.addAttribute("word", word.getName());
         model.addAttribute("description", word.getDescription());
-        model.addAttribute("example", word.getExample());
+        //model.addAttribute("example", word.getExample());
         model.addAttribute("longUrl", urlInDto.getLongUrl());
         return "result";
     }
