@@ -12,7 +12,7 @@ public class WordsMapper {
         return word;
     }
 
-    public static WordDto toWordDto (Word word) {
+    public static WordDto toWordDto(Word word) {
         return WordDto.builder()
                 .name(word.getName())
                 .description(word.getDescription())

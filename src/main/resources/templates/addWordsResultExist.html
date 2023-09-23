@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>FunnyUrls</title>
-  <link th:href="@{/styles/style.css}" rel="stylesheet" />
-  <link th:href="@{/img/icon.png}" rel="shortcut icon" />
-  <script th:inline="javascript">
-  </script>
-  <script type="text/javascript" th:src="@{/js/script.js}"></script>
+    <meta charset="UTF-8">
+    <title>FunnyUrls</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet"/>
+    <link th:href="@{/img/icon.png}" rel="shortcut icon"/>
+    <script th:inline="javascript">
+    </script>
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -15,19 +15,19 @@
 <h2>Shorten your URLs & Learn funny words</h2>
 
 <form action="/admin/words" method="POST" id="wordsForm">
-  <div>
-    <label for="name">Add Word</label>
-    <input  type="text" name="name" id="name" placeholder="word">
-    <br \>
-    <label for="description">Add Description</label>
-    <input  type="text" name="description" id="description" placeholder="description">
-    <button>GO</button>
-  </div>
+    <div>
+        <label for="name">Add Word</label>
+        <input type="text" name="name" id="name" placeholder="word">
+        <br \>
+        <label for="description">Add Description</label>
+        <input type="text" name="description" id="description" placeholder="description">
+        <button>GO</button>
+    </div>
 </form>
 
 <p style="color: #ff088c">The word already exists in database</p>
 <!-- partial -->
-  <script  src="../static/js/script.js"></script>
+<script src="../static/js/script.js"></script>
 
 </body>
 </html>

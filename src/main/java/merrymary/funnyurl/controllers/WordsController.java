@@ -23,7 +23,7 @@ public class WordsController {
     }
 
     @PostMapping
-    public String addWords(@Valid @ModelAttribute WordDto word, Model model){
+    public String addWords(@Valid @ModelAttribute WordDto word, Model model) {
         return service.addWords(word, model);
     }
 

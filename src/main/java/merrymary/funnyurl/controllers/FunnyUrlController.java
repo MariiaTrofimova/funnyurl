@@ -3,6 +3,7 @@ package merrymary.funnyurl.controllers;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import merrymary.funnyurl.dto.UrlInDto;
+import merrymary.funnyurl.dto.WordDto;
 import merrymary.funnyurl.exception.NotFoundException;
 import merrymary.funnyurl.service.FunnyUrlService;
 import org.springframework.http.HttpStatus;
@@ -20,13 +21,23 @@ import javax.validation.Valid;
 @Slf4j
 @RequiredArgsConstructor
 public class FunnyUrlController {
+    private static final String PREFIX = "http://localhost:8080/";
+
+
     private final FunnyUrlService service;
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public String add(@Valid @ModelAttribute UrlInDto urlInDto, HttpServletRequest request, Model model) {
         String ip = request.getRemoteAddr();
-        return service.addUrl(urlInDto, ip, model);
+
+        WordDto wordDto = service.addUrl(urlInDto, ip);
+        model.addAttribute("shortUrl", PREFIX + wordDto.getName());
+        model.addAttribute("word", wordDto.getName());
+        model.addAttribute("description", wordDto.getDescription());
+        model.addAttribute("longUrl", urlInDto.getLongUrl());
+
+        return "result";
     }
 
     @GetMapping("/{shortUrl}")
@@ -36,7 +47,13 @@ public class FunnyUrlController {
             throw new NotFoundException("Link contains non letter characters");
         }
         String ip = request.getRemoteAddr();
-        return service.getLongUrl(shortUrl, attributes, ip);
+
+        attributes.addFlashAttribute("flashAttribute", "redirectedFromFunnyUrls");
+        attributes.addAttribute("attribute", "redirectedFromFunnyUrls");
+
+        String longUrl = service.getLongUrl(shortUrl, ip);
+
+        return new RedirectView(longUrl);
     }
 
     @GetMapping("/")
