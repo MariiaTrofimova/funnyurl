@@ -14,7 +14,11 @@ import merrymary.funnyurl.repository.StatisticsRepository;
 import merrymary.funnyurl.repository.UrlRepository;
 import merrymary.funnyurl.repository.WordRepository;
 import merrymary.funnyurl.service.FunnyUrlService;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -42,11 +46,13 @@ public class FunnyUrlServiceImpl implements FunnyUrlService {
 
     @Override
     public WordDto addUrl(UrlInDto urlInDto, String ip) {
-        Word word = wordRepo.findFirstByFreeTrue();
-        if (word == null) {
+        PageRequest page = PageRequest.of(0, 1);
+        List<Word> words = wordRepo.findFree(page).getContent();
+        if (words.isEmpty()) {
             log.warn("All words are busy");
             throw new NotFoundException("All words are busy, ask anybody to add words");
         }
+        Word word = words.get(0);
         Url url = UrlMapper.toUrl(urlInDto, word);
         repository.save(url);
         log.info("url {} refers to word {}. Saved by ip {}", url.getId(), word.getName(), ip);

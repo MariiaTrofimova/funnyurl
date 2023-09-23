@@ -9,5 +9,6 @@ public class UrlMapper {
         Url url = new Url();
         url.setLongUrl(urlInDto.getLongUrl());
         url.setWord(word);
+        return url;
     }
 }
