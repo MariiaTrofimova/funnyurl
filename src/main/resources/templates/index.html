@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FunnyUrls</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet"/>
+    <link th:href="@{/img/icon.png}" rel="shortcut icon"/>
+    <script th:inline="javascript">
+    </script>
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h1>Funny URLs</h1>
+<h2>Shorten your URLs & Learn funny words</h2>
+
+<form action="/" method="POST" id="longUrlForm">
+    <div>
+        <label for="longUrl">Paste long URL</label>
+        <input type="url" name="longUrl" id="longUrl" placeholder="http://longUrl">
+        <button>GO</button>
+    </div>
+</form>
+<!-- partial -->
+<script src="../static/js/script.js"></script>
+
+</body>
+</html>
